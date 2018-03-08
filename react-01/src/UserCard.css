@@ -1,0 +1,41 @@
+.user-card {
+  display: block;
+  width: 600px;
+  height: 180px;
+  border: #eee 1px solid;
+  border-radius: 3px;
+  padding: 15px 10px;
+}
+
+.user-card .card-left {
+  width: 180px;
+  height: 180px;
+  display: block;
+  transition: 1s 1s height ease;
+}
+
+.user-card .card-left img {
+  width: 180px;
+  height: 180px;
+  border-radius: 90px;
+}
+
+.user-card .card-left img:hover {
+  animation: avatar-spin infinite 10s linear
+}
+
+.user-card .card-right {
+  display: block;
+  margin: -180px 0 0 200px;
+  text-align: left;
+}
+
+.user-card .card-right h2 {
+  display: block;
+  text-shadow: -1px -1px 1px rgba(0,0,0,0.9);
+}
+
+@keyframes avatar-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
