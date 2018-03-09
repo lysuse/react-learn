@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
-export default class Clock extends Component {
+class Clock extends Component {
   constructor(props) {
     super(props);
     this.state = {date: new Date()};
@@ -16,7 +17,6 @@ export default class Clock extends Component {
   }
 
   componentWillMount() {
-    clearInterval(this.timerID);
     console.log('into componentWillMount');
   }
 
@@ -38,6 +38,7 @@ export default class Clock extends Component {
   }
 
   componentWillUnmount() {
+    clearInterval(this.timerID);
     console.log('into componentWillUnmount');
   }
 
@@ -57,3 +58,11 @@ export default class Clock extends Component {
     );
   }
 }
+
+console.log(PropTypes);
+
+Clock.propTypes = {
+  name: PropTypes.string
+}
+
+export default Clock;

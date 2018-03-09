@@ -224,3 +224,78 @@ class Welcome extends React.Component {
     )
   }
   ```
+## Lists and Keys
+
+    列表渲染可以是还有map函数，下面是map函数的基本用法：
+    ```js
+    const numbers = [1, 2, 3, 4, 5, 6];
+    const doubled = numbers.map((number) => number * 2);
+    console.log(doubled);
+    ```
+
+    + 渲染多个组件
+    ```js
+    const numbers = [1, 2, 3, 4, 5];
+    const listItems = numbers.map((number) =>
+      <li>{number}</li>
+    );
+
+    ReactDOM.render(
+      <ul>{listItems}</ul>,
+      document.getElementById('root')
+    )
+    ```
+    + 数据作为属性提取
+    ```js
+    function NumberList(props) {
+      const numbers = props.numbers;
+      const listItems = numbers.map((number) => <li>{number}</li>);
+      return (
+        <ul>{listItems}</ul>
+      );
+    }
+    ```
+    >小数判断相等
+    const floatEpsilon = Math.pow(2, -23);
+
+    const equal = (a, b) => {
+     return Math.abs(a - b) <= floatEpsilon * Math.max(Math.abs(a), Math.abs(b));
+    }
+    Key在循环遍历时指定
+    ```js
+    //通过可靠的，唯一的作为key
+    const todoItems = todos.map((todo) => <li key={todo.id}>{todo.text}</li>);
+    //id不确定，不稳定的情况下使用index
+    const todoItems2 = todos.map((todo, index) => <li key={index}>{todo.text}</li>);
+    //组件循环遍历
+    function NumberList(props) {
+      const numbers = props.numbers;
+      return (
+        <ul>
+          {numbers.map((number) =>
+            <ListItem key={number.toString()} value={number} />
+          )}
+        </ul>
+      );
+    }
+    ```
+
+## 表单(Forms)
+
+      + 可控组件
+      + 处理多输入框
+      + input file类型的输入框需要参见不可控组件
+
+      setState 会自动merge（合并）改变到当前状态
+
+## 状态提升(Lifting State Up)
+
+      通过将子组件的状态提升到父组件的State，提升复用和数据管理能力。
+
+## 组合（Composition） 与 继承（Inhreitance）
+
+    React 拥有一个强大的组合模型，我们建议使用组合而不是继承以实现代码的重用。
+
+    使用 props(属性) 和 组合已经足够灵活来明确、安全的定制一个组件的外观和行为。切记，组件可以接受任意的 props(属性) ，包括原始值、React 元素，或者函数。
+
+    如果要在组件之间重用非 U I功能，我们建议将其提取到单独的 JavaScript 模块中。组件可以导入它并使用该函数，对象或类，而不扩展它。

@@ -4,6 +4,8 @@ import './App.css';
 import Welcome from './Welcome';
 import UserCard from './UserCard';
 import Clock from './Clock';
+import Form from './Form';
+import Reservation from './Reservation';
 
 //函数式定义组件
 function TimeClock(props) {
@@ -12,6 +14,25 @@ function TimeClock(props) {
   } else {
     return (<h2>It is {new Date().toLocaleTimeString()}.</h2>)
   }
+}
+
+function FancyBorder(props) {
+  return (
+    <div className={'FancyBorder FancyBorder-' + props.color}>
+      {props.children}
+    </div>
+  );
+}
+
+function WelcomeDialog() {
+  return (
+    <FancyBorder color="blue">
+      <h1 className="Dialog-title">Welcome</h1>
+      <p className="Diialog-message">
+        Tank you for visiting my GitHub!
+      </p>
+    </FancyBorder>
+  );
 }
 
 
@@ -52,6 +73,11 @@ class App extends Component {
           resume="Java,web,front developer"
           githubUrl="https://github.com/lysuse" />
         <button type="button" onClick={() => {this.switchClock()}} className="go-btn">Switch Clock!</button>
+
+        <Form />
+        <Reservation />
+
+        <WelcomeDialog />
       </div>
     );
   }

@@ -31,7 +31,13 @@
   font-size: 14px;
   color: #fff;
 }
-
+.FancyBorder {
+  width: 300px;
+  border: #eee 2px solid;
+}
+.FancyBorder-blue {
+  border: blue 2px solid;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
