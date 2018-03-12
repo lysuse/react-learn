@@ -1,0 +1,37 @@
+.App {
+  width: 990px;
+  margin: 0 auto;
+  border: #eee 1px solid;
+  min-height: 500px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.App .pannel .pannel-header {
+  border-top: #eee 1px solid;
+  border-bottom: #eee 1px solid;
+  text-align: left;
+  padding-left: 15px;
+  cursor: pointer;
+}
+.App .pannel .pannel-header h3 {
+  height: 48px;
+  line-height: 48px;
+  padding: 0;
+  margin: 0 auto;
+  vertical-align: middle;
+}
+.App .pannel .pannel-header h3 em {
+  font-size: 12px;
+  float: right;
+  padding-right: 15px;
+  font-weight: normal;
+  font-style: normal;
+}
+.App .pannel .pannel-header:hover {
+  background: #eee;
+}
+.App .pannel .pannel-body {
+  padding: 5px 15px;
+  min-height: 80px;
+}
