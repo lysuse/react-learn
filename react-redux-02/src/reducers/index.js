@@ -79,5 +79,31 @@ const reverseTwoNumber =  n => {
 console.log(reverseTwoNumber(8))
 console.log(reverseTwoNumber(8).join('|').replace(/\|/gi,'\n'))
 
+//ES6 Generator 函数
+// 特征: 1. function 关键字与函数名之间有一个星号
+//       2. 函数内部使用 yield 表达式，定义不同的内部状态
+
+function* helloWordGenerator() {
+  yield 'hello';
+  yield 'word';
+  return 'ending';
+}
+//返回的是一个指向内部状态的指针对象（Iterator Object）
+var hw = helloWordGenerator();
+console.log(hw.next())
+//将输出 {value: 'hello', done : false}
+console.log(hw.next())
+//将输出 {value: 'word', done : false}
+console.log(hw.next())
+//将输出 {value: 'ending', done : true}
+console.log(hw.next())
+//将输出 {value: undefined, done : true}
+
+function* gen() {
+  yield 123 + 456
+}
+
+console.log(gen().next());
+// 将输出 {value: 579, done: false}
 
 export default rootReducer

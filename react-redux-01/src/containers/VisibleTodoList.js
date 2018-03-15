@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
-
+//connect 是构建高阶组件的连接器
 const VisibleTodoList = connect(
   mapStateToProps,
   mapDispatchToProps
