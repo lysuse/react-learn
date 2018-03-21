@@ -1,0 +1,3 @@
+export const REQUEST_NAVS = 'REQUEST_NAVS'
+
+export const REQUEST_ARTICLE = 'REQUEST_ARTICLE'

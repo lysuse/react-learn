@@ -1,0 +1,121 @@
+@import './variable.scss';
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #f5f5f5;
+}
+
+.page-content {
+  width: $cwidth;
+  margin: 0 auto;
+}
+
+.header {
+  height: $header-h;
+  line-height: $header-h;
+  background: linear-gradient(10deg, $primary-color-light, $primary-color, $primary-color-light);
+  text-align: center;
+  .header-content {
+    height: 80px;
+    text-align: left;
+    // background: #f11;
+    h2 {
+      width: 130px;
+      height: $header-h;
+      line-height: $header-h;
+      padding: 0;
+      margin: 0;
+      padding: 0 15px;
+      display: inline-block;
+      vertical-align: middle;
+      color: #fff;
+    }
+    .navs {
+      display: inline-block;
+
+      a {
+        width: 120px;
+        display: inline-block;
+        text-decoration: none;
+        text-align: center;
+        color: #fff;
+
+        &:hover,&.active{
+          background: $hnav-active-color;
+        }
+      }
+    }
+
+    .user {
+      display: inline-block;
+      width: 120px;
+      float: right;
+      text-align: center;
+      >a {
+        width: 120px;
+        display: inline-block;
+        text-decoration: none;
+        color: #fff;
+        &:hover {
+          background: $hnav-active-color;
+        }
+      }
+      .menus {
+        display: none;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border: #ccc 1px solid;
+        border-top: none;
+        background: rgba(0,0,0,.3);
+        opacity: .5;
+        li {
+          list-style: none;
+          display: inline-block;
+          min-width:120px;
+          text-align: center;
+          padding: 0;
+          margin: 0;
+          a {
+            width: 100%;
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            font-size: 12px;
+            &:hover {
+              background: #000;
+            }
+          }
+        }
+      }
+      &:hover {
+        ul {
+          opacity: 1;
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.main-content {
+  min-height: 500px;
+  border: #eee 1px solid;
+  margin: 15px auto;
+  background: #fff;
+}
+
+.footer {
+  background: $hnav-active-color;
+  text-align: center;
+  color: #fff;
+  height: 100px;
+  line-height: 100px;
+  p {
+    a {
+      color: #eee;
+      text-decoration: none;
+    }
+  }
+}
