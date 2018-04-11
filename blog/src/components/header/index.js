@@ -2,21 +2,29 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 
-const Header = ({ navs, user }) => (
+const navs = [
+  {path:'/', title: '首页'},
+  {path: '/technology', title: '技术笔记'},
+  {path: '/lifeNote', title: '生活随笔'},
+  {path: '/about', title: '关于'},
+  {path: '/tags', title: '标签'}
+]
+
+const Header = ({ user }) => (
   <div className='header'>
     <div className="header-content page-content">
-      <h2>测试</h2>
+      <h2>YoungForward</h2>
       <div className="navs">
         {navs.map((nav, index) =>
-          <NavLink key={index}
-                exact={true}
+          <NavLink key={'nav_'+index}
+                exact={nav.path === '/'}
                 to={nav.path}
                 activeClassName='active'> {nav.title} </NavLink>
         )}
       </div>
       <div className="user">
         <NavLink to='/admin'
-                activeClassName='active'> {user.username || 'YoungStream'} </NavLink>
+                activeClassName='active'> {user && user.username ? user.username : 'YoungStream'} </NavLink>
         <ul className="menus">
           <li>
             <NavLink to='/admin'
@@ -35,9 +43,5 @@ const Header = ({ navs, user }) => (
     </div>
   </div>
 )
-
-Header.propTypes = {
-  navs: PropTypes.array.isRequired
-}
 
 export default Header
