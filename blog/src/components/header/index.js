@@ -23,9 +23,9 @@ const Header = ({ user }) => (
         )}
       </div>
       <div className="user">
-        <NavLink to='/admin'
-                activeClassName='active'> {user && user.username ? user.username : 'YoungStream'} </NavLink>
-        <ul className="menus">
+        <NavLink to={(user && user.logged) ? '/admin' : '/login'}
+                activeClassName='active'> {(user && user.logged) ? 'YoungStream' : '登录'} </NavLink>
+              <ul className="menus" style={{display: (user && user.logged) ? 'block' : 'none'}}>
           <li>
             <NavLink to='/admin'
                     activeClassName='active'> 个人资料 </NavLink>

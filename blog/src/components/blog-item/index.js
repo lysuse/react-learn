@@ -10,6 +10,12 @@ const BlogItem = ({ blog }) => (
       {blog.content.substring(0, 120)+'...'}
     </div>
     <div className="blog-item-footer">
+      <ul className="blog-section">
+        <li>
+          <a href="">技术博文</a>
+        </li>
+        <li><a href="">&gt;Java技术</a></li>
+      </ul>
       <NavLink to="/">posted {blog.createdDate}</NavLink>
       <NavLink to="/">阅读 ({blog.viewCount})</NavLink>
       <NavLink to="/">评论 ({blog.commentCount})</NavLink>

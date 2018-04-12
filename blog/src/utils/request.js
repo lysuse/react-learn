@@ -1,4 +1,6 @@
-import { message } from 'antd'
+import {
+  message
+} from 'antd'
 
 // 封装请求返回的一些公共处理
 function Fetch(url, type, params) {
@@ -7,8 +9,11 @@ function Fetch(url, type, params) {
 
   let reqBody = {}
 
+  const headers = {}
+
   if (params && typeof params === 'object') {
-    for(let key in params) {
+    headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+    for (let key in params) {
       formData.append(key, params[key])
     }
     reqBody = formData
@@ -21,23 +26,25 @@ function Fetch(url, type, params) {
   const defer = new Promise((resolve, reject) => {
     fetch(url, {
       method: type,
+      headers,
       body: reqBody
     }).then(response => {
-        return response.json()
+      return response.json()
     }).then(data => {
-        //返回成功数据
-        if (data.code === 0) {
-          resolve(data)
-        } if (data.code === 401 || data.code === 10401 || data.code === 10407) {
-          message.error('你还没有登录，请登录后再操作！')
-          window.location.href = window.location.origin + '/login?returnUrl='+window.location.href
-        } else {
-          reject(data)
-        }
+      //返回成功数据
+      if (data.code === 0) {
+        resolve(data)
+      }
+      if (data.code === 401 || data.code === 10401 || data.code === 10407) {
+        message.error('你还没有登录，请登录后再操作！')
+        window.location.href = window.location.origin + '/login?returnUrl=' + window.location.href
+      } else {
+        reject(data)
+      }
     }).catch(error => {
-        //捕获异常
-        console.log(error.msg)
-        reject()
+      //捕获异常
+      console.log(error.msg)
+      reject()
     })
   })
 

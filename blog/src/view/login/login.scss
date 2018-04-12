@@ -1,0 +1,89 @@
+@import "../../styles/variable";
+
+.login-form {
+  padding: 120px;
+  height: 280px;
+  text-align: center;
+  background: #fff;
+
+  form {
+    width: 400px;
+    padding: 0 15px 50px;
+    margin: 0 auto;
+    border-radius: 5px;
+    border: #eee 1px solid;
+    box-shadow: 0 0 8px #eee;
+
+    h2 {
+      margin: 0;
+      font-size: 16px;
+      color: $primary-color;
+      text-align: left;
+      height: 50px;
+      line-height: 50px;
+      border-bottom: $primary-color-light 1px dashed;
+    }
+
+    .form-item {
+      display: block;
+      padding: 15px 0;
+      position: relative;
+
+      input {
+        display: block;
+        width: 385px;
+        border: #f1f1f1 1px solid;
+        height: 35px;
+        padding-left: 15px;
+        color: $primary-color;
+        font-weight: bold;
+
+        &:focus {
+          border: $primary-color 1px solid;
+          box-shadow: 0 0 5px $primary-color;
+        }
+      }
+
+      button {
+        display: inline-block;
+        width: 160px;
+        height: 38px;
+        border: none !important;
+        color: #fff;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button[type='submit'] {
+        margin-right: 20px;
+        background: $primary-color;
+
+        &:focus,
+        &:hover {
+          box-shadow: 0 0 18px $primary-color;
+        }
+      }
+
+      button[type='reset'] {
+        background: #9d9d9d;
+
+        &:focus,
+        &:hover {
+          box-shadow: 0 0 18px #ccc;
+        }
+      }
+
+      .captcha-code {
+        position: absolute;
+        right: -2px;
+        top: 15px;
+        height: 38px;
+        cursor: pointer;
+      }
+    }
+
+    .pt30 {
+      padding-top: 30px;
+    }
+  }
+}

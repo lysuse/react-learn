@@ -27,9 +27,15 @@ export default class BlogBanner extends Component {
   }
 
   switchActiveIndex(index) {
+    if (this.timer) {
+      clearInterval(this.timer)
+    }
     this.setState({
       activeIndex: index
     })
+    setTimeout(()=>{
+      this.startTimer()
+    },100)
   }
 
   startTimer() {
@@ -66,7 +72,7 @@ export default class BlogBanner extends Component {
           </div>
         </div>
         <div className="blog-sign">
-          <div class="content">
+          <div className="content">
             <p>
               从个体的角度来看，能够在一开始就不进入这样的困境，是一个很难做到的聪明选择。
             </p>

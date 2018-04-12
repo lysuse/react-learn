@@ -1,11 +1,14 @@
 import React from 'react'
 import BlogItem from '../blog-item'
-import { Pagination } from 'antd'
-
-const BlogList = ({ page, onPageChange }) => (
+import Pager from '../pager'
+import './blog_list.scss'
+const BlogList = ({ title, page, onPageChange }) => (
   <div className="blog-list">
+    <h2>
+      {title}
+    </h2>
     {page.datas.map((blog, index) => <BlogItem blog={blog} key={blog.id} />)}
-    <Pagination simple defaultCurrent={page.page} onChange={(page, pageSize)=>{onPageChange(page, pageSize)}} total={page.total} />
+    <Pager page={page.page} pageSize={page.pageSize} total={page.total} onChange={(page, pageSize)=>{onPageChange(page, pageSize)}} />
   </div>
 )
 export default BlogList

@@ -1,3 +1,4 @@
+@import "../../styles/variable";
 .blog-item {
   background: #fff;
   border-radius: 4px;
@@ -23,6 +24,25 @@
     height: 65px;
   }
   .blog-item-footer {
+    .blog-section {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: inline-block;
+      float: left;
+      li {
+        padding: 0;
+        margin: 0;
+        display: inline-block;
+        padding: 3px 1px;
+        border-radius: 10px;
+        a {
+          color: $primary-color-light;
+          position: relative;
+          margin-left: 0 !important;
+        }
+      }
+    }
     text-align: right;
     padding: 10px 0;
     a {

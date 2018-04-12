@@ -14,8 +14,8 @@ const initBlog = {
   detail: {},
   page: {
     params:{},
-    page: 1,
-    pageSize: 10,
+    page: 2,
+    pageSize: 5,
     total: 10,
     loadedAll: false,
     loading: false,

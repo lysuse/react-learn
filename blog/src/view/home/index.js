@@ -38,7 +38,7 @@ class Home extends Component {
       <div>
         <BlogBanner></BlogBanner>
         <Body className="home-page" sider={sider}>
-          <BlogList page={this.props.blog.page}></BlogList>
+          <BlogList title='最新文章' page={this.props.blog.page}></BlogList>
         </Body>
       </div>
     )
