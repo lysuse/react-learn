@@ -7,7 +7,7 @@ const BlogItem = ({ blog }) => (
       <a href="">{blog.title}</a>
     </h2>
     <div className="blog-item-content">
-      {blog.content.substring(0, 120)+'...'}
+      {blog.sourceContent.substring(0, 120) + '...'}
     </div>
     <div className="blog-item-footer">
       <ul className="blog-section">

@@ -1,9 +1,6 @@
 import React,{ Component } from 'react'
 import './pager.scss'
 export default class Pager extends Component {
-  constructor(props) {
-    super(props)
-  }
   getPages() {
     const pageArray = []
     const totalPage = Math.ceil((this.props.total || 1) / (this.props.pageSize || 1))
@@ -12,7 +9,7 @@ export default class Pager extends Component {
     for (let i = start; i < end + 1; i++) {
       pageArray.push(i)
     }
-    if (start === end) {
+    if (start === end && start !== 1) {
       pageArray.push(this.props.page)
     }
     return pageArray

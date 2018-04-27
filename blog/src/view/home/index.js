@@ -4,6 +4,7 @@ import Body from '@/components/body'
 import SectionSider from '@/components/section-sider'
 import BlogList from '@/components/blog-list'
 import BlogBanner from '@/components/banner'
+import { fetchArticles } from '@/redux/actions'
 import './home.scss'
 const siders = [
   {
@@ -32,6 +33,10 @@ const siders = [
   }
 ]
 class Home extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(fetchArticles({pageSize: 10}))
+  }
   render() {
     const sider = (<SectionSider title='热门文章' sections={siders}/>)
     return (

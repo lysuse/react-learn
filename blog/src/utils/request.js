@@ -3,24 +3,38 @@ import {
 } from 'antd'
 
 // 封装请求返回的一些公共处理
-function Fetch(url, type, params) {
+const Fetch = (url, type, params) => {
 
   let formData = new FormData()
 
   let reqBody = {}
 
-  const headers = {}
+  const headers = {
+  }
 
   if (params && typeof params === 'object') {
     headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+    let urlParams = '?'
     for (let key in params) {
-      formData.append(key, params[key])
+      if (type === 'GET' || type === 'HEAD') {
+        urlParams += `${key}=${params[key]}`
+      } else {
+        formData.append(key, params[key])
+      }
     }
-    reqBody = formData
+    if (type === 'GET' || type === 'HEAD') {
+      url += urlParams
+    } else {
+      reqBody = formData
+    }
   }
-
+  
   if (params && typeof params === 'string') {
-    reqBody = params
+    if (type === 'GET' || type === 'HEAD') {
+      url += params
+    } else {
+      reqBody = params
+    }
   }
 
   const defer = new Promise((resolve, reject) => {
@@ -43,7 +57,8 @@ function Fetch(url, type, params) {
       }
     }).catch(error => {
       //捕获异常
-      console.log(error.msg)
+      console.error(error)
+      console.log(error.message)
       reject()
     })
   })
