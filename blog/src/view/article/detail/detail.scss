@@ -1,0 +1,56 @@
+.article-detail-page {
+  .body-content {
+    .detail-wrapper {
+      padding: 0 15px;
+      padding-bottom: 20px;
+      .article-detail-header {
+        border-bottom: #eee 1px dashed;
+        h2 {
+        }
+        .article-detail-header-info {
+          height: 38px;
+          line-height: 38px;
+          border-top: #eee 1px dashed;
+          .article-tags {
+            height: 38px;
+            vertical-align: middle;
+            display: inline-block;
+            float: left;
+            a {
+              padding: 3px 5px;
+              background: #3884ff;
+              color: #fff;
+              font-size: 12px;
+              text-decoration: none;
+              border-radius: 4px;
+            }
+          }
+          .article-counts {
+            height: 38px;
+            text-align: right;
+            display: inline-block;
+            float: right;
+            a {
+              color: #ccc;
+              font-size: 12px;
+              margin-left: 10px;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+      .content-markdown {
+        pre {
+          padding: 16px;
+          overflow: auto;
+          font-size: 85%;
+          line-height: 1.45;
+          background-color: #f6f8fa;
+          border-radius: 3px;
+          font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
+        }
+      }
+    }
+    background: #fff;
+  }
+}

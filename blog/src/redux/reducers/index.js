@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import {
-  REQUEST_NAVS, REQUEST_ARTICLE, RECEIVE_ARTICLE
+  REQUEST_NAVS, REQUEST_ARTICLE, RECEIVE_ARTICLE, RECEIVE_ARTICLE_DETAIL
 } from '../actions'
 
 const initUser = {
@@ -30,10 +30,15 @@ const user = (state = initUser, action) => {
 
 const blog = (state = initBlog, action) => {
   switch (action.type) {
-    case RECEIVE_ARTICLE: 
+    case RECEIVE_ARTICLE:
       return {
-        detail: state.detail,
+        detail: action.detail,
         page: action.page
+      }
+    case RECEIVE_ARTICLE_DETAIL:
+      return {
+        detail: action.detail,
+        page: state.page
       }
     default:
       return state
