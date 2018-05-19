@@ -8,6 +8,7 @@ const BlogList = ({ title, page, onPageChange }) => (
       {title}
     </h2>
     {page.datas.map((blog, index) => <BlogItem blog={blog} key={blog.id} />)}
+    {page.loading ? <div >加载中...</div>: null}
     <Pager page={page.page} pageSize={page.pageSize} total={page.total} onChange={(page, pageSize)=>{onPageChange(page, pageSize)}} />
   </div>
 )

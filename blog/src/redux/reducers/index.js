@@ -30,6 +30,11 @@ const user = (state = initUser, action) => {
 
 const blog = (state = initBlog, action) => {
   switch (action.type) {
+    case REQUEST_ARTICLE:
+      return {
+        detail: state.detail,
+        page: Object.assign({}, state.page, {loading: true})
+      }
     case RECEIVE_ARTICLE:
       return {
         detail: action.detail,

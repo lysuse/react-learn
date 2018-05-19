@@ -7,6 +7,10 @@ export const REQUEST_ARTICLE = 'REQUEST_ARTICLE'
 export const RECEIVE_ARTICLE = 'RECEIVE_ARTICLE'
 export const RECEIVE_ARTICLE_DETAIL = 'RECEIVE_ARTICLE_DETAIL'
 
+export const loadingArticle = () => ({
+    type: REQUEST_ARTICLE
+})
+
 export const receiveArticles = (page) => ({
     type: RECEIVE_ARTICLE,
     page
@@ -37,11 +41,13 @@ const _processArticleContent = (article) => {
 }
 
 export const fetchArticles = filters => dispatch => {
+    dispatch(loadingArticle())
     return request.get('/api/v1/articles', filters)
         .then(result => {
             result.data.loadedAll = result.data.totalPages <= result.data.page
             result.data.params = filters
             result.data.datas = result.data.datas.map(data => _processArticleContent(data))
+            result.data.loading = false
             dispatch(receiveArticles(result.data))
         })
         .catch(e => console.log(e))
