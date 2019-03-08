@@ -1,0 +1,30 @@
+{
+  "article": [
+    {"key": "id", "dataIndex":"id", "title": "编号"},
+    {"key": "title", "dataIndex":"title", "title": "标题"},
+    {"key": "rootSectionName", "dataIndex":"rootSectionName", "title": "一级栏目"},
+    {"key": "secondSectionName", "dataIndex":"secondSectionName", "title": "二级栏目"},
+    {"key": "pubUser", "dataIndex":"pubUser", "title": "发布人"},
+    {"key": "viewCount", "dataIndex":"viewCount", "title": "浏览数"},
+    {"key": "commentCount", "dataIndex":"commentCount", "title": "评论数"},
+    {"key": "createdDate", "dataIndex":"createdDate", "title": "创建时间"},
+    {"key": "modifiedDate", "dataIndex":"modifiedDate", "title": "修改时间"}
+  ],
+  "tag": [
+    {"name": "id", "title": "编号"},
+    {"name": "created_date", "title": "创建时间"},
+    {"name": "modified_date", "title": "修改时间"},
+    {"name": "name", "title": "名称"},
+    {"name": "remark", "title": "备注"}
+  ],
+  "banner": [
+    {"name": "id", "title": "编号"},
+    {"name": "created_date", "title": "创建时间"},
+    {"name": "modified_date", "title": "修改时间"},
+    {"name": "image_url", "title": "图片地址"},
+    {"name": "new_page", "title": "是否打开新页面"},
+    {"name": "rank", "title": "排序"},
+    {"name": "target_url", "title": "目标页面地址"},
+    {"name": "title", "title": "标题"}
+  ]
+}

@@ -6,6 +6,7 @@ export const REQUEST_NAVS = 'REQUEST_NAVS'
 export const REQUEST_ARTICLE = 'REQUEST_ARTICLE'
 export const RECEIVE_ARTICLE = 'RECEIVE_ARTICLE'
 export const RECEIVE_ARTICLE_DETAIL = 'RECEIVE_ARTICLE_DETAIL'
+export const SET_USER_INFO = 'SET_USER_INFO'
 
 export const loadingArticle = () => ({
     type: REQUEST_ARTICLE
@@ -21,8 +22,13 @@ export const receiveArticleDetail = (detail) => ({
     detail
 })
 
-const _processArticleContent = (article) => {
-  let resultHtml = article.sourceContent
+export const setUserInfo = userInfo => ({
+  type: SET_USER_INFO,
+  payload: userInfo
+})
+
+export const _processArticleContent = (article) => {
+  let resultHtml = article.sourceContent || ''
   if (/^\[\w+\]/.test(resultHtml)) {
     const typeIndex = resultHtml.indexOf(']')
     let type = resultHtml.substring(1, typeIndex)
@@ -31,9 +37,11 @@ const _processArticleContent = (article) => {
         resultHtml = marked(resultHtml.substring(typeIndex + 1))
         break;
       default:
-        resultHtml = resultHtml.substring(typeIndex + 1)
+        resultHtml = resultHtml.substring(typeIndex + 1).replace(/\n/g, '<br />')
     }
     article.sourceType = type
+  } else {
+    resultHtml = resultHtml.replace(/\n/g, '<br />')
   }
   article.safeContent = resultHtml.replace(/<\/?.+?>/g, '').trim()
   article.content = resultHtml
@@ -60,4 +68,13 @@ export const getArticleDetail = id => dispatch => {
           dispatch(receiveArticleDetail(_processArticleContent(result.data)))
       })
       .catch(e => console.log(e))
+}
+
+export const login = ({ username, password, captcha}) => dispatch => {
+  return request.post(`/api/v1/login`, { username, password, captcha })
+    .then(result => dispatch(getUserInfo()))
+}
+
+export const getUserInfo = () => dispatch => {
+  return request.get('/api/v1/userInfo').then(res => dispatch(setUserInfo(res.data)))
 }

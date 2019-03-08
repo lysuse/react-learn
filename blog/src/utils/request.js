@@ -7,9 +7,10 @@ const Fetch = (url, type, params) => {
 
   let formData = new FormData()
 
-  let reqBody = {}
+  let reqBody = ''
 
   const headers = {
+    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
   }
 
   if (params && typeof params === 'object') {
@@ -17,23 +18,21 @@ const Fetch = (url, type, params) => {
     let urlParams = '?'
     for (let key in params) {
       if (type === 'GET' || type === 'HEAD') {
-        urlParams += `${key}=${params[key]}`
+        urlParams += `${key}=${params[key]}&`
       } else {
-        formData.append(key, params[key])
+        reqBody += `${key}=${params[key]}&`
       }
     }
+    urlParams = urlParams.slice(0, -1)
+    reqBody = reqBody.slice(0, -1)
     if (type === 'GET' || type === 'HEAD') {
       url += urlParams
-    } else {
-      reqBody = formData
     }
   }
   
   if (params && typeof params === 'string') {
     if (type === 'GET' || type === 'HEAD') {
       url += params
-    } else {
-      reqBody = params
     }
   }
 
@@ -41,7 +40,7 @@ const Fetch = (url, type, params) => {
     fetch(url, {
       method: type,
       headers,
-      body: reqBody
+      body: (type === 'GET' || type === 'HEAD') ? null : reqBody
     }).then(response => {
       return response.json()
     }).then(data => {
@@ -49,9 +48,12 @@ const Fetch = (url, type, params) => {
       if (data.code === 0) {
         resolve(data)
       }
-      if (data.code === 401 || data.code === 10401 || data.code === 10407) {
+      console.log(data)
+      if ((data.code === 401 || data.code === 10401 || data.code === 10407) && window.location.pathname.indexOf('login') < 0 && url.indexOf('/api/v1/login') < 0 && url.indexOf('/api/v1/userInfo') < 0) {
         message.error('你还没有登录，请登录后再操作！')
-        window.location.href = window.location.origin + '/login?returnUrl=' + window.location.href
+        setTimeout(() => {
+          // window.location.href = window.location.origin + '/login?returnUrl=' + window.location.href
+        }, 2000)
       } else {
         reject(data)
       }

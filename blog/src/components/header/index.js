@@ -1,19 +1,17 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 
 const navs = [
   {path:'/', title: '首页'},
-  {path: '/technology', title: '技术笔记'},
-  {path: '/lifeNote', title: '生活随笔'},
-  {path: '/about', title: '关于'},
-  {path: '/tags', title: '标签'}
+  {path: '/articles/technology', title: '技术笔记'},
+  {path: '/articles/lifeNote', title: '生活随笔'},
+  {path: '/about', title: '关于'}
 ]
 
-const Header = ({ user }) => (
+const Header = ({ user, config }) => (
   <div className='header'>
     <div className="header-content page-content">
-      <h2>YoungForward</h2>
+      <h2>YoungStream</h2>
       <div className="navs">
         {navs.map((nav, index) =>
           <NavLink key={'nav_'+index}
@@ -25,19 +23,12 @@ const Header = ({ user }) => (
       <div className="user">
         <NavLink to={(user && user.logged) ? '/admin' : '/login'}
                 activeClassName='active'> {(user && user.logged) ? 'YoungStream' : '登录'} </NavLink>
-              <ul className="menus" style={{display: (user && user.logged) ? 'block' : 'none'}}>
-          <li>
-            <NavLink to='/admin'
-                    activeClassName='active'> 个人资料 </NavLink>
-          </li>
-          <li><NavLink to='/admin'
-                  activeClassName='active'> 栏目管理 </NavLink>
-          </li>
-          <li><NavLink to='/admin'
-                  activeClassName='active'> 文章管理 </NavLink>
-          </li>
-          <li><NavLink to='/admin'
-                  activeClassName='active'> 标签管理 </NavLink></li>
+        <ul className="menus">
+          {config.menuCodes.map((menuCode, index) => (
+            <li key={'head_menu_' + menuCode}>
+              <NavLink to={`/admin/${menuCode}`} activeClassName='active'> {config.menus[index]} </NavLink>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

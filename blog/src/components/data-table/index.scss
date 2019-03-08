@@ -1,0 +1,28 @@
+@import '../../styles/variable.scss';
+
+.data-table {
+  width: 100%;
+  table{
+    width: 100%;
+    thead tr {
+      background: $primary-color;
+      td {
+        color: #fff;
+        border: none;
+      }
+    }
+    tr {
+      height: 40px;
+      td {
+        text-align: left;
+      }
+    }
+  }
+
+  table tbody tr:nth-child(even){
+    background: $primary-color;
+    td {
+      color: #fff;
+    }
+  }
+}

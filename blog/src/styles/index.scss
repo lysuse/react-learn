@@ -3,13 +3,44 @@
 html, body, #root, #root .router{
   margin: 0;
   padding: 0;
-  background: #f5f5f5;
+  background: #f3f3f3;
+  min-height: 100vh;
+  height: 100%;
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  color: rgba(0, 0, 0, 0.65);
+  .router {
+    height: 100%;
+  }
 }
 
 .page-content {
   width: $cwidth;
   margin: 0 auto;
+  min-height: 100vh;
+}
+
+.no-data {
+  position: relative;
+  height: 120px;
+  line-height: 120px;
+  width: 100%;
+  color: #ccc;
+  background: #fff;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.loading-spin {
+  text-align: center;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    color: $primary-color;
+    margin-right: 10px;
+  }
 }
 
 .header {
@@ -129,16 +160,38 @@ html, body, #root, #root .router{
   }
 }
 
+.table-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
 .footer {
   background: $hnav-active-color;
   text-align: center;
   color: #fff;
-  height: 100px;
-  line-height: 100px;
+  height: 50px;
+  line-height: 50px;
+  position: sticky;
+  bottom: 0;
   p {
     a {
       color: #eee;
       text-decoration: none;
     }
   }
+}
+
+.btn-primary {
+  display: inline-block;
+  width: 80px;
+  height: 34px;
+  line-height: 34px;
+  border-radius: 3px;
+  border: $primary-color-light 1px solid;
+  color: #fff;
+  text-align: center;
+  
 }

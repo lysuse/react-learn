@@ -20,7 +20,7 @@ export default class Pager extends Component {
     const pages = this.getPages()
     const showPrev = totalPage > 1 && this.props.page > 1
     const showNext = totalPage > 1 && totalPage > this.props.page
-    console.log(totalPage, pages)
+    if (totalPage <= 1) return null
     return (
       <ul className="pager">
         {showPrev && <li className="pager-prev"><a href="javascript:void(0);">Prev</a></li>}

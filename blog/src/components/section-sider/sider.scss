@@ -31,6 +31,14 @@
       border-bottom: #eee 1px dotted;
       text-decoration: none;
       color: #333;
+      .content {
+        display: inline-block;
+        font-size: 12px;
+        max-width: 220px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+      }
       &:last-child {
         border-bottom: none;
       }

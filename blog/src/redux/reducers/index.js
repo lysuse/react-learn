@@ -1,13 +1,10 @@
 import { combineReducers } from 'redux'
 import {
-  REQUEST_NAVS, REQUEST_ARTICLE, RECEIVE_ARTICLE, RECEIVE_ARTICLE_DETAIL
+  SET_USER_INFO, REQUEST_ARTICLE, RECEIVE_ARTICLE, RECEIVE_ARTICLE_DETAIL
 } from '../actions'
 
 const initUser = {
-  logged: false,
-  id: '',
-  username: '',
-  avatar: ''
+  logged: false
 }
 
 const initBlog = {
@@ -23,7 +20,22 @@ const initBlog = {
   }
 }
 
+const initConfig = {
+  menus: ['个人资料', '栏目管理', '文章管理', '标签管理', '滚图管理', '每日名言'],
+  menuCodes: ['profile', 'menuManage', 'articleManage', 'tagManage', 'bannerManage', 'dayQuote']
+}
+
 const user = (state = initUser, action) => {
+  switch (action.type) {
+    case SET_USER_INFO:
+      return Object.assign({ logged: !!action.payload}, action.payload)
+    default:
+      return state
+  }
+  return state
+}
+
+const config = (state = initConfig, action) => {
   return state
 }
 
@@ -53,5 +65,6 @@ const blog = (state = initBlog, action) => {
 
 export default combineReducers({
   blog,
-  user
+  user,
+  config
 })
