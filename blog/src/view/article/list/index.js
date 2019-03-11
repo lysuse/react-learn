@@ -3,26 +3,22 @@ import Body from '@/components/body'
 import SectionSider from '@/components/section-sider'
 import BlogList from '@/components/blog-list'
 import { useArticlePage, useSimpleArticlePage } from '@/effects/article'
+import { useSection } from '@/effects/sections';
 
 const ArticleList = props => {
-  const sectionMap ={
-    lifeNote: {
-      title: '生活随笔',
-      rightSideTitle: '随笔排行',
-      dataParams: {},
-      rootSectionId: 6
-    },
-    technology: {
-      title: '技术笔记',
-      rightSideTitle: '热门笔记',
-      dataParams: {},
-      rootSectionId: 7
-    }
+
+  const { sections } = useSection()
+
+  const rootSection = sections.find(s => `${s.id}` === props.match.params.rid)
+  let secondSection = null
+  if (rootSection && props.match.params.sid) {
+    secondSection = rootSection.children.find(s => `${s.id}` === props.match.params.sid)
   }
-  const { title, rightSideTitle, rootSectionId } = sectionMap[props.match.params.sectionName] || { title: '技术笔记', rightSideTitle: '热门笔记' }
-  const articlePage = useArticlePage({ pageSize: 10, rootSectionId })
-  const simples = useSimpleArticlePage({ page: 1, pageSize: 12, sort: 'viewCount', order: 'desc', rootSectionId })
-  const sider = (<SectionSider key={`sider_${rootSectionId}`} title={rightSideTitle} sections={simples} />)
+
+  const articlePage = useArticlePage({ pageSize: 10, rootSectionId: (rootSection ? rootSection.id : ''), secondSectionId: (secondSection ?secondSection.id : '') })
+  const simples = useSimpleArticlePage({ page: 1, pageSize: 12, sort: 'viewCount', order: 'desc', rootSectionId: (rootSection ? rootSection.id : ''), secondSectionId: (secondSection ? secondSection.id : '') })
+  const sider = (<SectionSider key={`sider_${rootSection ? rootSection.id : 'all'}`} title={'相关文章'} sections={simples} />)
+  const title = (secondSection ? secondSection.title : '') || (rootSection ? rootSection.title : '')
   return (
     <Body className="home-page" sider={sider}>
       <BlogList key={props.location.pathname} title={title} {...articlePage}></BlogList>

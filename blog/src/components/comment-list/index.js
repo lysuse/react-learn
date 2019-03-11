@@ -9,7 +9,9 @@ const CommentList = props => {
       {props.comments.map(comment => (
         <CommentItem comment={comment} key={`comment_${props.articleId}_data_${comment.id}`} />
       ))}
-      <a href="javascript:void(0);" onClick={props.loadMoreComment}>加载更多</a>
+      <div className="loadmore">
+        {(!props.loadedAll) && <a href="javascript:void(0);" onClick={props.loadMoreComment}>加载更多</a>}
+      </div>
     </div>
   )
 }

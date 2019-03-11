@@ -8,6 +8,7 @@ export const useArticlePage = ({ sort = 'createdDate', order = 'desc', q = '', t
   const [datas, setDatas] = useState([])
   const [totalPages, setTotalPages] = useState(1)
   const [loading, setLoading] = useState(false)
+  const [reload, setRelaod] = useState(false)
   // 加载分页文章信息
   useEffect(() => {
     setLoading(true)
@@ -21,7 +22,21 @@ export const useArticlePage = ({ sort = 'createdDate', order = 'desc', q = '', t
     }).catch(e => {
       setLoading(false)
     })
-  }, [sort, order, q, tagId, pageSize, page, rootSectionId, secondSectionId])
+  }, [sort, order, q, tagId, pageSize, page, rootSectionId, reload, secondSectionId])
+
+  const deleteArticle = id => {
+    return http.deleted(`/api/v1/articles/${id}`).then(res => {
+      setRelaod(!reload)
+      return res
+    })
+  }
+
+  const saveArticle = article => {
+    return http.post(`/api/v1/articles`, article).then(res => {
+      setRelaod(!reload)
+      return res
+    })
+  }
   // 返回相关信息
   return {
     page,
@@ -30,7 +45,9 @@ export const useArticlePage = ({ sort = 'createdDate', order = 'desc', q = '', t
     totalPages,
     datas,
     loading,
-    loadPage: setPage
+    loadPage: setPage,
+    deleteArticle,
+    saveArticle
   }
 }
 
@@ -59,9 +76,10 @@ export const useArticleComments = articleId => {
   const [loadedAll, setLoadedAll] = useState(false)
   const [page, setPage] = useState(1)
   const [total, setTotal] = useState(0)
+  const [reload, setReload] = useState(false)
   useEffect(() => {
     if (loadedAll) return
-    http.get(`/api/v1/articles/${articleId}`).then(res => {
+    http.get(`/api/v1/articles/${articleId}/comments`).then(res => {
       if (page === 1) {
         setComments(res.data.datas)
       } else {
@@ -72,12 +90,28 @@ export const useArticleComments = articleId => {
       }
       setTotal(res.data.total)
     })
-  }, [page, articleId])
+  }, [page, articleId, reload])
+
+  const postComment = params => {
+    return http.post(`/api/v1/articles/${params.articleId}/comment`, params).then(res => {
+      setReload(true)
+      return res
+    })
+  }
+
+  const loadMore = () => {
+    if (loadedAll) {
+      setPage(page + 1)
+    }
+  }
+
   return {
     loadedAll,
     setPage,
     total,
-    comments
+    comments,
+    postComment,
+    loadMore
   }
 }
 
@@ -89,4 +123,14 @@ export const useQuote = () => {
     })
   }, quote)
   return quote
+}
+
+export const useSearchTags = q => {
+  const [result, setResult] = useState([])
+  useEffect(() => {
+    http.get(`/api/v1/tags/search`, {q}).then(res => {
+     setResult(res.data) 
+    })
+  }, [q])
+  return result
 }

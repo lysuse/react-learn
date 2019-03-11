@@ -9,10 +9,10 @@ const BlogItem = ({blog}) => (<div className='blog-item'>
   <div className="blog-item-footer">
     <ul className="blog-section">
       <li>
-        <a href={`/article/${blog.rootSectionId}`}>{blog.rootSectionName}</a>
+        <NavLink to={`/articles/${blog.rootSectionId}`}>{blog.rootSectionName}</NavLink>
       </li>
       <li>
-        <a href={`/article/${blog.rootSectionId}/${blog.secondSectionId}`}>&gt;{blog.secondSectionName}</a>
+        <NavLink to={`/articles/${blog.rootSectionId}/${blog.secondSectionId}`}>&gt;{blog.secondSectionName}</NavLink>
       </li>
     </ul>
     <a href="#">posted {blog.createdDate}</a>

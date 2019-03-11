@@ -17,6 +17,18 @@ class Login extends Component {
       }
     }
   }
+  toQueryObject = query => {
+    if (!query || query === '?') {
+      return {}
+    }
+    query = query[0] === '?' ? query.substring(1) : query
+    const result = {}
+    query.split('&').map(q => {
+      result[q.split('=')[0]] = q.split('=')[1]
+    })
+    return result
+  }
+
   updateCaptcha = () => {
     this.setState({captchaUrl: `/api/v1/captcha/image?_t=${new Date().getTime()}`})
   }
@@ -29,7 +41,9 @@ class Login extends Component {
       })
       this.props.dispatch(getUserInfo())
       setTimeout(() => {
-        this.props.history.replace('/')
+        const queryObject = this.toQueryObject(this.props.location.search)
+        const path = queryObject.returnUrl ? decodeURIComponent(queryObject.returnUrl) : '/'
+        this.props.history.replace(path)
       }, 1000)
     }).catch(err => {
       this.setState({ errorMsg: err.msg || '登录失败', successMsg: null })

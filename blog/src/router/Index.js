@@ -15,8 +15,9 @@ export default class AppRouter extends React.Component {
         <App>
           <Route exact={true} path='/' component={Home}/>
           <Route path='/login' component={Login}/>
-          <Route path='/articles/:sectionName' component={ArticleList}/>
-          <Route path='/article/:rid/:sid/:id' component={ArticleDetail}/>
+          <Route exact={true} path='/articles/:rid' component={ArticleList}/>
+          <Route exact={true} path='/articles/:rid/:sid' component={ArticleList}/>
+          <Route exact={true} path='/article/:rid/:sid/:id' component={ArticleDetail}/>
           <Route path='/admin/:tabName' component={Admin}/>
           <Route path='/about' component={About}/>
         </App>

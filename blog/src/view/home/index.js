@@ -8,7 +8,7 @@ import { useBanner } from '@/effects/banner'
 import './home.scss'
 
 const Home = () => {
-  const articlePage = useArticlePage({pageSize: 10})
+  const articlePage = useArticlePage({pageSize: 10, sort: 'createdDate'})
   const simples = useSimpleArticlePage({ page: 1, pageSize: 12, sort: 'viewCount', order: 'desc' })
   const banners = useBanner()
   const quote = useQuote()

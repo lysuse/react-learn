@@ -41,7 +41,7 @@ const CommentForm = (props) => {
     }
     setErrorMsg('')
     if (props.onPost) {
-      props.onPost({ username: usernameInput.value, contact: concatInput.value, content: contentInput.value, captcha: captchaInput.value})
+      props.onPost({ name: usernameInput.value, contact: concatInput.value, content: contentInput.value, captcha: captchaInput.value})
     }
   }
   return (

@@ -15,6 +15,7 @@ export const useTableModel = ({ dataUrl, createUrl, editUrl, deleteUrl, tableNam
   const [editData, setEditData] = useState({})
   const [showModal, setShowModal] = useState(false)
   const [modalTitle, setModalTitle] = useState('')
+  const [reload, setRelaod] = useState(false)
 
   const saveCreateData = () => {
     if (!editData || Object.keys(editData).length <= 0) {
@@ -25,7 +26,7 @@ export const useTableModel = ({ dataUrl, createUrl, editUrl, deleteUrl, tableNam
       setEditData({})
       setShowModal(false)
       message.success('保存成功！')
-      setPage(page > 1 ? (page - 1) : 1)
+      setRelaod(!reload)
     }).catch(e => {
       message.error(e.message)
     })
@@ -40,7 +41,7 @@ export const useTableModel = ({ dataUrl, createUrl, editUrl, deleteUrl, tableNam
       setEditData({})
       setShowModal(false)
       message.success('修改成功！')
-      setPage(page > 1 ? (page - 1) : 1)
+      setRelaod(!reload)
     }).catch(e => {
       message.error(e.message)
     })
@@ -56,7 +57,7 @@ export const useTableModel = ({ dataUrl, createUrl, editUrl, deleteUrl, tableNam
   const deleteData = (id) => {
     return http.deleted(`${deleteUrl}/${id}`, {id}).then(res => {
       message.success('删除成功！')
-      setPage(page > 1 ? (page - 1) : 1)
+      setRelaod(!reload)
     }).catch(e => {
       message.error(e.message)
     })
@@ -81,11 +82,11 @@ export const useTableModel = ({ dataUrl, createUrl, editUrl, deleteUrl, tableNam
 
   const onChange = (pagination, filters, sorter) => {
     const { current, pageSize } = pagination
-    const { sortField, sortOrder } = sorter
+    const { field, order } = sorter
     setPage(current)
-    setSort(sortField)
+    setSort(field === 'date' ? 'createdDate' : field)
     setPageSize(pageSize)
-    setOrder(sortOrder === 'ascend' ? 'asc' : 'desc')
+    setOrder(order === 'ascend' ? 'asc' : 'desc')
   }
 
   const onEditDataChange = (e) => {
@@ -108,7 +109,7 @@ export const useTableModel = ({ dataUrl, createUrl, editUrl, deleteUrl, tableNam
     }).catch(e => {
       setLoading(false)
     })
-  }, [dataUrl, sort, order, page, pageSize])
+  }, [dataUrl, sort, order, page, pageSize, reload])
 
   return {
     saveData,

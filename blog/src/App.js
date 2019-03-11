@@ -1,29 +1,27 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import Header from './components/header'
 import Footer from './components/footer'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { getUserInfo } from './redux/actions';
+import { getUserInfo } from './redux/actions'
+import { useSection } from '@/effects/sections'
 
-class App extends Component {
-
-  componentWillMount() {
-    if (!this.props.user.logged) {
-      this.props.dispatch(getUserInfo())
+const App = props => {
+  useEffect(() => {
+    if (!props.user.logged) {
+      props.dispatch(getUserInfo())
     }
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        <Header user={this.props.user} config={this.props.config}/>
-          <div key='content' className="page-content main-content">
-            {this.props.children}
-          </div>
-        <Footer/>
-      </React.Fragment>
-    )
-  }
+  })
+  const { sections } = useSection()
+  return (
+    <React.Fragment>
+      <Header user={props.user} activePath={props.match.path} sections={sections} config={props.config} />
+      <div key='content' className="page-content main-content">
+        {props.children}
+      </div>
+      <Footer />
+    </React.Fragment>
+  )
 }
 
 const mapStateToProps = state => {

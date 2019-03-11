@@ -1,10 +1,10 @@
 import React from 'react'
+import './index.scss'
 
 const About = props => {
-  
   return (
-    <div>
-      关于我
+    <div className="about-younsgtream">
+      
     </div>
   )
 }

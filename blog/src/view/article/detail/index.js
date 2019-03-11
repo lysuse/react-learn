@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { message } from 'antd'
 import Body from '@/components/body'
 import SectionSider from '@/components/section-sider'
 import CommentForm from '@/components/comment-form'
@@ -8,12 +9,20 @@ import './detail.scss'
 
 const ArticleDetail = props => {
 
-  const { total, loadedAll, comments, setPage } = useArticleComments(props.match.params.id)
+  const { total, loadedAll, comments, loadMore, postComment, setPage } = useArticleComments(props.match.params.id)
   const article = useArticleDetail(props.match.params.id)
   const simples = useSimpleArticlePage({ page: 1, pageSize: 12, sort: 'viewCount', order: 'desc'})
+  const doPostComment = params => {
+    return postComment(Object.assign({}, params, {articleId: article.id})).then(res => {
+      message.success('评论成功')
+      return res
+    }).catch(e => {
+      message.error(e.message)
+    })
+  }
 
   const sider = (<SectionSider key={`detail_${props.match.params.id}`} title='热门文章' sections={simples} />)
-  const tags = ([]).map(tag => <a key={'tag_a_' + tag.id} href="#">{tag.name}</a>)
+  const tags = (article.tags || []).map(tag => <a style={{marginRight: '10px'}} key={'tag_a_' + tag.id} href="#">{tag.name}</a>)
 
   return (
     <div>
@@ -35,8 +44,8 @@ const ArticleDetail = props => {
             __html: article.content
           }}></div>
         </div>
-        <CommentForm />
-        {total > 0 && <CommentList comments={comments} total={total} loadMoreComment={load} loadedAll={loadedAll} />}
+        <CommentForm onPost={doPostComment}/>
+        {total > 0 && <CommentList comments={comments} total={total} loadMoreComment={loadMore} loadedAll={loadedAll} />}
       </Body>
     </div>
   )

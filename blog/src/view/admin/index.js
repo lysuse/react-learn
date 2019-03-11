@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import AdminLeft from './components/AdminLeft'
 import Profile from './components/Profile'
 import MenuManage from './components/MenuManage'
@@ -10,7 +11,7 @@ import './admin.scss'
 
 const Admin = props => {
   const { tabName } = props.match.params
-  const { config } = props 
+  const { config, user } = props 
   const AdminCotents = {
     profile: Profile,
     menuManage: MenuManage,
@@ -25,7 +26,7 @@ const Admin = props => {
       deleteUrl: '/api/v1/tags',
       dataUrl: '/api/v1/tags',
       columns: [
-        { key: "name", dataIndex: "name", title: "名称", editType: "input" },
+        { key: "name", dataIndex: "name", title: "名称", sorter: true, editType: "input" },
         { key: "remark", dataIndex: "remark", title: "备注", editType: "textarea" }
       ]
     },
@@ -36,8 +37,8 @@ const Admin = props => {
       deleteUrl: '/api/v1/banners',
       dataUrl: '/api/v1/banners',
       columns: [
-        { key: "title", dataIndex: "title", title: "标题", editType: "input" },
-        { key: "rank", dataIndex: "rank", title: "排序", editType: "number" },
+        { key: "title", dataIndex: "title", sorter: true, title: "标题", editType: "input" },
+        { key: "rank", dataIndex: "rank", sorter: true, title: "排序", editType: "number" },
         { key: "imageUrl", dataIndex: "imageUrl", title: "图片地址", editType: "input", render: (text, banner) => (<a title={text} target="_blank" href={text}>{banner.title}</a>) },
         { key: "targetUrl", dataIndex: "targetUrl", title: "跳转地址", editType: "input" },
         { key: "newPage", dataIndex: "newPage", title: "打开新页面", editType: "switch", render: (text, banner) => (<span>{text?'是':'否'}</span>) }
@@ -56,12 +57,20 @@ const Admin = props => {
     }
   }
   const panelProps = manageProps[tabName] || {}
-
+  if (!user.logged) {
+    return (
+      <Redirect
+        to={{
+          pathname: `/login?returnUrl=${encodeURIComponent(props.location.pathname)}`
+        }}
+      />
+    )
+  }
   return (
     <div className="admin-body">
       <AdminLeft menuCodes={config.menuCodes} menus={config.menus} tabName={tabName} />
       <div className="right-content">
-        <AdminContentPan {...panelProps} />
+        <AdminContentPan user={user} {...panelProps} />
       </div>
     </div>
   );

@@ -4,13 +4,14 @@ import { useTableModel } from '@/effects/data'
 
 const DataManage = props => {
   const { saveData, deleteData, newData, editData, onEditDataChange, editingData, showModal, hideModal, modalTitle, tablePage } = useTableModel(props)
-  const columns = [{ key: "id", dataIndex: "id", title: "编号" }]
+  const columns = [{ key: "id", sorter: true, dataIndex: "id", title: "编号" }]
       .concat(props.columns || [])
       .concat(
         [
           {
             title: '时间',
             key: 'date',
+            sorter: true,
             render: (text, data) => (
               <span>{data.createdDate} | {data.modifiedDate}</span>
             )
@@ -46,6 +47,7 @@ const DataManage = props => {
       </div>
       <Table
         sorter={true}
+        rowKey = {r => r.id}
         columns={columns}
         {...tablePage}
       />
