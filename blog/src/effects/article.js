@@ -78,7 +78,7 @@ export const useArticleComments = articleId => {
   const [total, setTotal] = useState(0)
   const [reload, setReload] = useState(false)
   useEffect(() => {
-    if (loadedAll) return
+    if (loadedAll || !articleId) return
     http.get(`/api/v1/articles/${articleId}/comments`).then(res => {
       if (page === 1) {
         setComments(res.data.datas)
@@ -133,4 +133,72 @@ export const useSearchTags = q => {
     })
   }, [q])
   return result
+}
+
+export const useAdminComments = () => {
+  const [articleId, setArticleId] = useState(null)
+  // 分页数据
+  const [page, setPage] = useState(1)
+  const [sort, setSort] = useState('createdDate')
+  const [order, setOrder] = useState('desc')
+  const [pageSize, setPageSize] = useState(10)
+  const [total, setTotal] = useState(0)
+  const [dataSource, setDataSource] = useState([])
+  const [reload, setRelaod] = useState(false)
+  const [showComment, setShowComment] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (!articleId) return
+    setLoading(true)
+    http.get(`/api/v1/articles/admin/${articleId}/comments`, { page, pageSize, sort, order }).then(res => {
+      setDataSource(res.data.datas)
+      setLoading(false)
+      setTotal(res.data.total)
+    }).catch(e => {
+      setLoading(false)
+    })
+  }, [articleId, sort, order, page, pageSize, reload])
+
+  const onChange = (pagination, filters, sorter) => {
+    const { current, pageSize } = pagination
+    const { field, order } = sorter
+    setPage(current)
+    setSort(field === 'date' ? 'createdDate' : field)
+    setPageSize(pageSize)
+    setOrder(order === 'ascend' ? 'asc' : 'desc')
+  }
+
+  const deleteComment = id => {
+    return http.deleted(`/api/v1/articles/comment/${id}`).then(res => {
+      setRelaod(!reload)
+      return res
+    })
+  }
+
+  const showCommentModal = articleId => {
+    setArticleId(articleId)
+    setShowComment(true)
+  }
+  const hideCommentModal = () => {
+    setArticleId(null)
+    setShowComment(false)
+  }
+
+  return {
+    showCommentModal,
+    hideCommentModal,
+    showComment,
+    deleteComment,
+    commentPage: {
+      loading,
+      pagination: {
+        current: page,
+        pageSize,
+        total
+      },
+      dataSource,
+      onChange,
+    }
+  }
 }

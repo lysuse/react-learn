@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Table, Button, Divider, Form, TreeSelect, Switch, Select, Modal, message, Popconfirm, Row, Col, Input, Icon } from 'antd'
-import { useArticlePage, useSearchTags } from '@/effects/article'
+import { useArticlePage, useSearchTags, useAdminComments } from '@/effects/article'
 import { useSection } from '@/effects/sections'
 import marked from 'marked'
 
@@ -12,6 +12,7 @@ const ArticleManage = props => {
   const [searchTag, setSeachTag] = useState('')
   const [selectTags, setSelectTags] = useState([])
   const tags = useSearchTags(searchTag)
+  const { showCommentModal, hideCommentModal, showComment, deleteComment, commentPage } = useAdminComments()
 
   const columns = [
     { key: "id", dataIndex: "id", title: "编号" },
@@ -30,7 +31,7 @@ const ArticleManage = props => {
     { key: "counts", dataIndex: "counts", title: "数量统计", render: (text, article) => (
         <span style={{fontSize: '12px'}}>
           <Icon type="eye" title="浏览数" theme="filled" />({article.viewCount})
-          <Icon type="message" title="评论数" theme="filled" />({article.commentCount})
+          <a href="javascript:void(0);" onClick={() => {showCommentModal(article.id)}}><Icon type="message" title="评论数" theme="filled" />({article.commentCount})</a>
         </span>
       )
     },
@@ -42,11 +43,29 @@ const ArticleManage = props => {
           <a href="javascript:void(0);" onClick={() => editingArticle(article)}>编辑</a>
           <Divider type="vertical" />
           <Popconfirm title={`你确定要删除该文章吗?`} onConfirm={() => { articlePage.deleteArticle(article.id) }} okText="确定" cancelText="取消">
-            <a href="javascript:void(0);" >删除</a>
+            <a href="javascript:void(0);">删除</a>
           </Popconfirm>
         </span>
       )}
   ]
+
+  const commetColumns = [
+    { key: "id", dataIndex: "id", sorter: true, title: "编号" },
+    { key: "contact", dataIndex: "contact", title: "联系方式" },
+    { key: "name", dataIndex: "name", title: "姓名" },
+    { key: "content", dataIndex: "content", title: "内容" },
+    { key: "createdDate", dataIndex: "createdDate", sorter: true, title: "评论时间"},
+    {
+      title: '操作',
+      key: 'action',
+      render: (text, c) => (
+        <Popconfirm title={`你确定要删除该留言吗?`} onConfirm={() => { deleteComment(c.id) }} okText="确定" cancelText="取消">
+          <a href="javascript:void(0);">删除</a>
+        </Popconfirm>
+      )
+    }
+  ]
+
   const layout = {
     labelCol: { span: 4 },
     wrapperCol: { span: 14 }
@@ -187,7 +206,21 @@ const ArticleManage = props => {
             </Col>
           </Row>
         </Form.Item>
-
+      </Modal>
+      <Modal
+        width={'50%'}
+        title={`留言列表`}
+        visible={showComment}
+        okText="确定"
+        cancelText="取消"
+        onOk={hideCommentModal}
+        onCancel={hideCommentModal}>
+        <Table
+          columns={commetColumns}
+          rowKey={c => c.id}
+          size="middle"
+          {...commentPage}
+        />
       </Modal>
     </div>
   )
