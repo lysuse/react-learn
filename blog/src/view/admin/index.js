@@ -6,7 +6,6 @@ import Profile from './components/Profile'
 import MenuManage from './components/MenuManage'
 import ArticleManage from './components/ArticleManage'
 import DataManage from './components/DataManage'
-import 'antd/dist/antd.css'
 import './admin.scss'
 
 const Admin = props => {

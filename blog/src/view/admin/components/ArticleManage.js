@@ -109,7 +109,7 @@ const ArticleManage = props => {
     articleParams.secondSectionId = articleParams.section.id || ''
     articleParams.pubUser = props.user.username
     articleParams.createdDate = ''
-    articleParams.createdDate = ''
+    articleParams.modifiedDate = ''
     articlePage.saveArticle(articleParams).then(res => {
       message.success('保存成功')
       setEditArticle({})

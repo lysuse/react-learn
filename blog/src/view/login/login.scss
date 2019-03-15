@@ -1,9 +1,13 @@
 @import "../../styles/variable";
 
 .login-form {
-  padding: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   background: #fff;
+  padding: 40px 0;
+  height: calc(100vh - 200px);
   * {
     box-sizing: content-box !important;
   }
@@ -103,4 +107,31 @@
     border: #00ff00 1px solid;
     color: #f5f5f5;
   }
+}
+
+@media screen and (max-width: 600px) {
+  .login-form {
+    padding: 0;
+    background: transparent;
+    form {
+      width: 75%;
+      background: #fff;
+      margin-top: 10px;
+      .form-item {
+        padding: 5px 0;
+        .captcha-code {
+          top: 5px;
+          right: 14px;
+        }
+      }
+      input {
+        width: calc(100% - 30px) !important;
+      }
+      .btn-login, .btn-reset {
+        width: 98% !important;
+        margin-right: 0 !important;
+        margin: 5px 0;
+      }
+    }
+  } 
 }

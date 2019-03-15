@@ -138,3 +138,41 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .blog-banner {
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 320px;
+    .banner-list {
+      margin-left: 10px;
+      margin-right: 10px;
+      width: calc(100% - 20px);
+      height: 160px;
+      .banner-item, .banner-item img {
+        height: 160px;
+        width: 100%;
+      }
+    }
+    .blog-sign {
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 10px;
+      width: calc(100% - 20px);
+      height: 120px;
+      .content {
+        height: 120px;
+        .sign-content {
+          height: 80px;
+        }
+        .author {
+          padding-right: 40px;
+        }
+        .book-tag {
+          border-left: 10px solid whitesmoke;
+          border-bottom: 10px solid #aaa;
+        }
+      }
+    }
+  }
+}

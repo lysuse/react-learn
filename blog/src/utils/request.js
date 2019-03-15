@@ -48,13 +48,13 @@ const Fetch = (url, type, params) => {
       if (data.code === 0) {
         resolve(data)
       }
-      console.log(data)
       if ((data.code === 401 || data.code === 10401 || data.code === 10407) && window.location.pathname.indexOf('login') < 0 && url.indexOf('/api/v1/login') < 0 && url.indexOf('/api/v1/userInfo') < 0) {
         message.error('你还没有登录，请登录后再操作！')
         setTimeout(() => {
           window.location.href = window.location.origin + '/login?returnUrl=' + encodeURIComponent(window.location.href.substring(window.location.origin.length))
         }, 2000)
       } else {
+        data.message = data.msg || ''
         reject(data)
       }
     }).catch(error => {

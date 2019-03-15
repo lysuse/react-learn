@@ -11,6 +11,9 @@
     height: 48px;
     line-height: 48px;
     border-bottom: #ddd 1px dotted;
+    overflow: hidden;
+    text-emphasis: ellipsis;
+    white-space: nowrap;
     a {
       font-size: 18px;
       font-weight: bold;
@@ -21,7 +24,7 @@
   .blog-item-content {
     padding: 10px 0;
     border-bottom: #eee 1px dotted;
-    height: 65px;
+    min-height: 65px;
   }
   .blog-item-footer {
     .blog-section {
@@ -54,5 +57,13 @@
         color: #333;
       }
     }
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  .blog-item .blog-item-footer a{
+    margin-left: 2px;
+    font-size: 12px;
   }
 }

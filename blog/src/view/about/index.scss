@@ -1,3 +1,22 @@
 .about-younsgtream {
-  
+  background: #fff;
+  padding: 10px;
+  border-radius: 3px;
+  p {
+    text-indent: 4ch;
+    text-align: left;
+    .contact-item {
+      display: block;
+      width: 80px;
+      text-align: right;
+      float: left;
+      margin-right: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .about-younsgtream {
+    margin: 0 10px;
+  }
 }

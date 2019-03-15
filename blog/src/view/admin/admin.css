@@ -1,0 +1,14 @@
+@import '../../../node_modules/antd/es/table/style/index.css';
+@import '../../../node_modules/antd/es/button/style/index.css';
+@import '../../../node_modules/antd/es/divider/style/index.css';
+@import '../../../node_modules/antd/es/form/style/index.css';
+@import '../../../node_modules/antd/es/tree-select/style/index.css';
+@import '../../../node_modules/antd/es/switch/style/index.css';
+@import '../../../node_modules/antd/es/select/style/index.css';
+@import '../../../node_modules/antd/es/modal/style/index.css';
+@import '../../../node_modules/antd/es/message/style/index.css';
+@import '../../../node_modules/antd/es/popover/style/index.css';
+@import '../../../node_modules/antd/es/input/style/index.css';
+@import '../../../node_modules/antd/es/spin/style/index.css';
+@import '../../../node_modules/antd/es/pagination/style/index.css';
+@import '../../../node_modules/antd/es/style/index.css';

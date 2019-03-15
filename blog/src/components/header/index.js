@@ -23,7 +23,7 @@ const Header = ({ user, config, sections = [], activePath }) => {
         </div>
         <div className="user">
           <NavLink to={(user && user.logged) ? '/admin' : '/login'}
-            activeClassName='active'> {(user && user.logged) ? 'YoungStream' : '登录'} </NavLink>
+            activeClassName='active'> {(user && user.logged) ? user.username : '登录'} </NavLink>
           <ul className="menus">
             {(user && user.logged) && config.menuCodes.map((menuCode, index) => (
               <li key={'head_menu_' + menuCode}>

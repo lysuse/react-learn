@@ -16,7 +16,7 @@ export default class BlogBanner extends Component {
       activeIndex: index
     })
     setTimeout(()=>{
-      this.startTimer()
+      // this.startTimer()
     },100)
   }
 
@@ -27,7 +27,7 @@ export default class BlogBanner extends Component {
   }
 
   componentDidMount() {
-    this.startTimer()
+    // this.startTimer()
   }
 
   componentWillUnmount() {

@@ -15,10 +15,9 @@ const BlogItem = ({blog}) => (<div className='blog-item'>
         <NavLink to={`/articles/${blog.rootSectionId}/${blog.secondSectionId}`}>&gt;{blog.secondSectionName}</NavLink>
       </li>
     </ul>
-    <a href="#">posted {blog.createdDate}</a>
-    <a href="#">阅读 ({blog.viewCount})</a>
-    <a href="#">评论 ({blog.commentCount})</a>
-    <a href="#">编辑</a>
+    <a href="#">posted {blog.createdDate ? blog.createdDate.substring(5) : ''}</a>
+    <a href="#">阅读({blog.viewCount})</a>
+    <a href="#">评论({blog.commentCount})</a>
   </div>
 </div>)
 

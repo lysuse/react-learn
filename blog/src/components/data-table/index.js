@@ -5,8 +5,6 @@ const DataTable = props => {
 
   const { fields, datas } = props
 
-  console.log(datas)
-
   return (
     <div className="data-table">
       <div className="data-table-filter">
