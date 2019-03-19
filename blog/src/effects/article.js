@@ -32,7 +32,7 @@ export const useArticlePage = ({ sort = 'createdDate', order = 'desc', q = '', t
   }
 
   const saveArticle = article => {
-    return http.post(`/api/v1/articles`, article).then(res => {
+    return http.postJson(`/api/v1/articles`, article).then(res => {
       setRelaod(!reload)
       return res
     })

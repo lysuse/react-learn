@@ -23,13 +23,13 @@ export default class Pager extends Component {
     if (totalPage <= 1) return null
     return (
       <ul className="pager">
-        {showPrev && <li className="pager-prev"><a href="javascript:void(0);">Prev</a></li>}
+        {showPrev && <li className="pager-prev"><a href="javascript:void(0);" onClick={() => { this.props.onChange(this.props.page - 1, this.props.pageSize) }}>Prev</a></li>}
         {pages.map((page, index) => (
           <li key={'pager_'+index} className={this.props.page === page ? 'active' : ''} onClick={() => {this.props.onChange(page, this.props.pageSize)}}>
             <a href="javascript:void(0);">{page}</a>
           </li>
         ))}
-        {showNext && <li className="pager-next"><a href="javascript:void(0);">Next</a></li>}
+        {showNext && <li className="pager-next"><a href="javascript:void(0);" onClick={() => { this.props.onChange(this.props.page + 1, this.props.pageSize) }}>Next</a></li>}
       </ul>
     )
   }

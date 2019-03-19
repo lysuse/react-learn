@@ -132,8 +132,9 @@ const ArticleManage = props => {
         columns={columns}
         rowKey={article => article.id}
         size="middle"
-        pagination={{ current: articlePage.page, results: articlePage.pageSize }}
+        pagination={{ current: articlePage.page, total: articlePage.total }}
         loading={articlePage.loading}
+        onChange={(pagination, filters, sorter) => { articlePage.loadPage(pagination.current) }}
         expandedRowRender={article => <p style={{ margin: 0, padding: 0 }} dangerouslySetInnerHTML={{ __html: article.content}}>
         </p>}
         dataSource={articlePage.datas}
